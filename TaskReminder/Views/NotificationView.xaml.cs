@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,17 +13,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TaskReminder.ViewModels;
 
 namespace TaskReminder
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    
+    public partial class NotificationView
     {
-        public MainWindow()
+        public NotificationView(NotificationViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
+        }
+
+        private void OkButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var mng = NotificationManager.GetInstance();
+            mng.AcceptNotification();
         }
     }
 }

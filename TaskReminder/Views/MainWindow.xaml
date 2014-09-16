@@ -1,0 +1,48 @@
+﻿<dx:DXWindow
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" 
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    x:Class="TaskReminder.MainWindow"
+    Title="TaskReminder" Height="350" Width="525"
+    dx:ThemeManager.ThemeName="Office2007Black"
+    >
+
+    <Grid >
+        <dxlc:LayoutControl Header="Header" Orientation="Vertical" UseLayoutRounding="True" View="GroupBox">
+            
+            <dxlc:LayoutGroup Orientation="Horizontal" VerticalAlignment="Top">
+                <dxlc:LayoutItem IsRequired="True" >
+                    <dxe:SpinButton x:Name="btn_NewTask">New Task</dxe:SpinButton>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem IsRequired="True" >
+                    <dxe:SpinButton x:Name="btn_DelTask">Delete Task</dxe:SpinButton>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem IsRequired="True" >
+                    <dxe:SpinButton x:Name="btn_TestPopup" Click="btn_TestPopup_Click">Test popup</dxe:SpinButton>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+
+
+            <dxg:GridControl ItemsSource="{Binding Path=TaskList}">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn Header="Задача" FieldName="Name" />
+                    <dxg:GridColumn Header="Напомнить" FieldName="NextRemindAt" Width="60">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:DateEditSettings DisplayFormat="dd.MM.yyyy, HH:mm" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn Header="Повтор" FieldName="Repeat" Width="50"/>
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView AllowPerPixelScrolling="True" AllowSorting="True" AutoWidth="True" NavigationStyle="Row"/>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+        </dxlc:LayoutControl>
+
+    </Grid>
+</dx:DXWindow>
